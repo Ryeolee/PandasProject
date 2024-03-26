@@ -6,13 +6,13 @@ import seaborn as sns
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv("gapminder.tsv", sep="\t") # dataFrame
+    df = pd.read_csv("gapminder.tsv", sep="\t")
     return df
 
-def plot_matplotlib(): # streamlit  문법
-    st.title("Categorical Bar Plot with Seaborn") # 대시보드 제목
+def plot_matplotlib():
+    st.title("Categorical Bar Plot with Seaborn")
     df = load_data()
-    fig, ax = plt.subplots() # 시각화
+    fig, ax = plt.subplots()
     
     # Using Seaborn's barplot function
     sns.barplot(x=df['year'], y=df['lifeExp'], data=df, ax=ax)
@@ -20,21 +20,21 @@ def plot_matplotlib(): # streamlit  문법
     # Labeling axes and title
     ax.set_xlabel("year")
     ax.set_ylabel("lifeExp")
-    ax.set_title("Bar Plot : Year vs. lifExp ")
+    ax.set_title("Categorical Bar Plot")
     
-    st.pyplot(fig) # 대시보드에 출력
+    st.pyplot(fig)
 
 def main():
-    st.title("Maxinum value per column")
+    st.title("Data Display st.dataframe()")
     st.checkbox("Use container width", value=False, key = 'use_container_width')
     
     df = load_data()
-    st.dataframe(df, use_container_width=True) # 대시보드에 표 삽입
+    st.dataframe(df, use_container_width=True)
 
-    #pandas style- 두번째 표 
+    #pandas style
     st.dataframe(df.iloc[:5,2:].style.highlight_max(axis=0))
 
-    plot_matplotlib() # 그래프 삽입    
+    plot_matplotlib()
     
     
 if __name__ == "__main__":
